@@ -1,9 +1,12 @@
 package com.googlesource.gerrit.plugins.messagecheckplugin;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import java.util.Set;
 
 import org.eclipse.jgit.errors.ConfigInvalidException;
 import org.eclipse.jgit.revwalk.RevCommit;
@@ -67,6 +70,7 @@ public class MessageValidator implements CommitValidationListener {
   }
 
   private static Logger log = LoggerFactory.getLogger(MessageValidator.class);
+  private Map<String, MatcherSection> matcherSections;
 
   @Inject
   private com.google.gerrit.server.config.PluginConfigFactory cfg;
@@ -114,5 +118,22 @@ public class MessageValidator implements CommitValidationListener {
     }
 
     return messages;
+  }
+
+  private HashMap loadMatcherSections(Project project, String refName) throws CommitValidationException {
+    HashMap matcherSections = new HashMap<>();
+    Boolean exclusive;
+    try {
+      // TODO
+      // Need to add some test code to understand how to iterate and duplicate the exclusive flag
+      // behaviour used for the access rights
+      Set<String> branches = cfg.getProjectPluginConfigWithInheritance(project.getNameKey(), "message-check-plugin")
+          .getSubsections("branch");
+      //exclusive = cfg.getProjectPluginConfigWithInheritance(project.getNameKey(), "message-check-plugin")
+      //    .getBoolean("branch", refName, Boolean.FALSE);
+    } catch(NoSuchProjectException e) {
+      throw new CommitValidationException("Project does not exist, cannot retrieve configuration.", e);
+    }
+    return matcherSections;
   }
 }
