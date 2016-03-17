@@ -22,11 +22,15 @@ limitations under the License.
   <artifactId>message-check-plugin</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>message-check-plugin</name>
+  <name>Gerrit Code Review - Commit Message Checker Plugin</name>
 
   <properties>
     <Gerrit-ApiType>plugin</Gerrit-ApiType>
-    <Gerrit-ApiVersion>2.9</Gerrit-ApiVersion>
+    <Gerrit-ApiVersion>2.11</Gerrit-ApiVersion>
+    <easymockVersion>3.0</easymockVersion>
+    <powermockVersion>1.5</powermockVersion>
+    <slf4jVersion>1.6.2</slf4jVersion>
+    <velocityVersion>1.6.4</velocityVersion>
   </properties>
 
   <build>
@@ -73,6 +77,35 @@ limitations under the License.
       <artifactId>gerrit-${Gerrit-ApiType}-api</artifactId>
       <version>${Gerrit-ApiVersion}</version>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity</artifactId>
+      <version>${velocityVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4jVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easymock</groupId>
+      <artifactId>easymock</artifactId>
+      <version>${easymockVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>${powermockVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-easymock</artifactId>
+      <version>${powermockVersion}</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

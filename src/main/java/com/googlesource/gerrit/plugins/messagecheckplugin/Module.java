@@ -14,11 +14,13 @@
 
 package com.googlesource.gerrit.plugins.messagecheckplugin;
 
+import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.git.validators.CommitValidationListener;
 import com.google.inject.AbstractModule;
 
 class Module extends AbstractModule {
   @Override
   protected void configure() {
-    // TODO
+    DynamicSet.bind(binder(), CommitValidationListener.class).to(MessageValidator.class);
   }
 }
